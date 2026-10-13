@@ -1,0 +1,13 @@
+{
+  "name": "Plotform",
+  "short_name": "Plotform",
+  "description": "House plans, 3D elevations and 3D interiors, designed online for homes across India.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
