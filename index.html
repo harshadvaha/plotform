@@ -1,6 +1,14 @@
 <!doctype html>
 <html lang="en-IN">
 <head>
+<script>
+/* arriving with ?panel=… or a #hash: never smooth-scroll through the 3D animation */
+(function(){ var q = new URLSearchParams(location.search), p = q.get('panel'), h = location.hash.slice(1);
+  if(p === 'brief' || p === 'about' || h === 'brief' || h === 'about'){ window.__pfPanel = p || h; history.replaceState(null, '', location.pathname); if('scrollRestoration' in history) history.scrollRestoration = 'manual'; }
+  if(h || p) document.documentElement.style.scrollBehavior = 'auto';
+})();
+</script>
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>House Plans & 3D Elevation Design Online in India | Plotform</title>
@@ -276,7 +284,7 @@ footer h2{font-size:clamp(30px,3.8vw,52px);margin:22px 0 30px}
 .burger{display:none}
 @media (min-width:900px){.nav .links a:not(.btn){display:inline-block;padding:12px 4px}}
 @media (max-width:899px){
-  .burger{all:unset;box-sizing:border-box;cursor:pointer;display:grid;align-content:center;justify-items:end;gap:5px;width:44px;height:44px;padding:0 6px;position:relative;z-index:2;align-self:center;margin-right:-6px}
+  .burger{all:unset;-webkit-tap-highlight-color:transparent;box-sizing:border-box;cursor:pointer;display:grid;align-content:center;justify-items:end;gap:5px;width:44px;height:44px;padding:0 6px;position:relative;z-index:2;align-self:center;margin-right:-6px}
   .burger i{display:block;height:1.5px;background:var(--ink);transition:transform .35s cubic-bezier(.2,.7,.2,1),opacity .2s,width .35s}
   .burger i:nth-child(1){width:26px}.burger i:nth-child(2){width:17px}.burger i:nth-child(3){width:26px}
   .burger:focus-visible{outline:2px solid var(--oak);outline-offset:2px}
@@ -290,6 +298,7 @@ footer h2{font-size:clamp(30px,3.8vw,52px);margin:22px 0 30px}
   .nav .links .btn{display:inline-flex;justify-content:center;margin-top:12px;font-size:14px;padding:12px 14px}
 }
 </style>
+<style>/* wa-hide */html[style*="overflow: hidden"] .wa-fab{opacity:0;pointer-events:none}.wa-fab{transition:opacity .2s}</style>
 </head>
 <body>
 
@@ -1573,6 +1582,11 @@ requestAnimationFrame(frame);
   nav.querySelectorAll('.links a').forEach(a => a.addEventListener('click', () => set(false)));
   document.addEventListener('click', e => { if(!nav.contains(e.target)) set(false); });
   document.addEventListener('keydown', e => { if(e.key === 'Escape'){ set(false); b.focus(); } });
+})();
+</script>
+<script>
+(function(){ var k = window.__pfPanel; if(k){ window.scrollTo(0, 0); var a = document.createElement('a'); a.setAttribute('data-panel', k); a.href = '#' + k; a.hidden = true; document.body.appendChild(a); setTimeout(function(){ a.click(); a.remove(); }, 60); }
+  setTimeout(function(){ document.documentElement.style.scrollBehavior = ''; }, 1200);
 })();
 </script>
 </body></html>

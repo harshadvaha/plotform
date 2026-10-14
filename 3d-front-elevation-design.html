@@ -28,8 +28,26 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&family=Jost:wght@300;400;500&display=swap">
-<link rel="stylesheet" href="/guide.css">
+<link rel="stylesheet" href="/guide.css?v=20">
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://plotform.design/#org", "name": "Plotform", "url": "https://plotform.design/"}, {"@type": "WebPage", "@id": "https://plotform.design/3d-front-elevation-design#page", "url": "https://plotform.design/3d-front-elevation-design", "name": "3D Front Elevation Design for Indian Houses, Online | Plotform", "description": "What a 3D front elevation is, what decides a good house elevation in India, what to send your designer, and Plotform's elevation price and delivery time.", "inLanguage": "en-IN", "isPartOf": {"@id": "https://plotform.design/#website"}, "publisher": {"@id": "https://plotform.design/#org"}, "about": {"@id": "https://plotform.design/#org"}, "dateModified": "2026-10-13", "breadcrumb": {"@id": "https://plotform.design/3d-front-elevation-design#crumbs"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://plotform.design/"}, {"@type": "ListItem", "position": 2, "name": "House plan guides", "item": "https://plotform.design/house-plans"}, {"@type": "ListItem", "position": 3, "name": "3D front elevation design", "item": "https://plotform.design/3d-front-elevation-design"}], "@id": "https://plotform.design/3d-front-elevation-design#crumbs"}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the difference between a 2D and a 3D elevation?", "acceptedAnswer": {"@type": "Answer", "text": "A 2D elevation is a flat, measured drawing of the front. A 3D elevation shows the house in perspective with materials, shadows and depth, so you can judge how it will actually look."}}, {"@type": "Question", "name": "Can you design an elevation for an existing floor plan?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Send us your plan and site photos. We may suggest small changes to windows or balconies to make the front work."}}, {"@type": "Question", "name": "How much does a 3D front elevation cost?", "acceptedAnswer": {"@type": "Answer", "text": "₹4,000 to ₹6,000 with Plotform, depending on plot size and floors, including 2 revisions."}}, {"@type": "Question", "name": "How long does a 3D elevation take?", "acceptedAnswer": {"@type": "Answer", "text": "3 to 4 days from a complete brief; a reel adds one day."}}]}]}</script>
+<style>
+.burger{display:none}
+@media (min-width:900px){.nav .links a:not(.btn){display:inline-block;padding:12px 4px}}
+@media (max-width:899px){
+  .burger{all:unset;-webkit-tap-highlight-color:transparent;box-sizing:border-box;cursor:pointer;display:grid;align-content:center;justify-items:end;gap:5px;width:44px;height:44px;padding:0 6px;position:relative;z-index:2;align-self:center;margin-right:-6px}
+  .burger i{display:block;height:1.5px;background:var(--ink);transition:transform .35s cubic-bezier(.2,.7,.2,1),opacity .2s,width .35s}
+  .burger i:nth-child(1){width:26px}.burger i:nth-child(2){width:17px}.burger i:nth-child(3){width:26px}
+  .burger:focus-visible{outline:2px solid var(--oak);outline-offset:2px}
+  .nav.menu-open .burger i:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+  .nav.menu-open .burger i:nth-child(2){opacity:0;width:0}
+  .nav.menu-open .burger i:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+  .nav .links{position:absolute;top:calc(100% - 4px);right:clamp(16px,4vw,44px);left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:0;width:max-content;min-width:168px;max-width:calc(100vw - 32px);padding:6px 18px 16px;background:var(--paper);border:0;border-radius:4px;box-shadow:0 10px 30px rgba(31,29,26,.13),0 1px 3px rgba(31,29,26,.08);
+    opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .25s ease,transform .3s cubic-bezier(.2,.7,.2,1),visibility 0s .3s;align-self:auto}
+  .nav.menu-open .links{opacity:1;visibility:visible;transform:none;transition:opacity .25s ease,transform .3s cubic-bezier(.2,.7,.2,1)}
+  .nav .links a:not(.btn){display:block;width:100%;text-align:right;padding:13px 2px;border-bottom:1px solid var(--hair);font-size:16px;line-height:1.2;color:var(--ink)}
+  .nav .links .btn{display:inline-flex;justify-content:center;margin-top:12px;font-size:14px;padding:12px 14px}
+}
+</style>
 </head>
 <body>
 <header class="nav">
@@ -55,9 +73,10 @@
     </svg></a>
   <button class="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mainNav"><i></i><i></i><i></i></button>
   <nav class="links" id="mainNav" aria-label="Main">
+    <a href="/?panel=about">About</a>
     <a href="/designs">Designs</a>
     <a href="/house-plans">Guides</a>
-    <a class="btn" href="/#brief">Share your requirements <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 7h11M8 3l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
+    <a class="btn" href="/?panel=brief">Share your requirements <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 7h11M8 3l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
   </nav>
 </header>
 <main class="g" id="top">
@@ -78,7 +97,7 @@
   <section class="cta">
   <h2>Tell us about your plot and the home you want on it.</h2>
   <p>Plot size, facing, the rooms you need and a budget range are enough to begin. We reply to every brief by email.</p>
-  <a class="btn" href="/#brief">Share your requirements <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 7h11M8 3l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
+  <a class="btn" href="/?panel=brief">Share your requirements <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 7h11M8 3l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
 </section>
   <nav class="related" aria-labelledby="rel-h"><p class="eyebrow">Keep reading</p><h2 id="rel-h">More house plan guides</h2><ul><li><a href="/30x40-house-plan">30x40 house plan</a><span>How to plan a house on a 30x40 plot: what fits on 1200 sq ft, layouts for east, west, north and south facing sites, Vastu notes and the cost of a custom plan.</span></li><li><a href="/20x30-house-plan">20x30 house plan</a><span>How to plan a house on a small 20x30 plot: 600 sq ft layouts over two or three floors, staircase and parking choices, light, ventilation and Vastu notes.</span></li><li><a href="/40x60-house-plan">40x60 house plan</a><span>Planning a 40x60 plot: 3BHK and 4BHK layouts on 2400 sq ft, courtyard planning, parking for two cars, facing and Vastu notes, and custom plan pricing.</span></li><li><a href="/vastu-house-plan">Vastu house plan</a><span>A practical guide to Vastu house planning: the usual direction for the entrance, kitchen, master bedroom, pooja, stairs and toilets, and how to balance Vastu with light and space.</span></li></ul></nav>
 </div>

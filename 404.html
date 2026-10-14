@@ -28,8 +28,26 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&family=Jost:wght@300;400;500&display=swap">
-<link rel="stylesheet" href="/guide.css">
+<link rel="stylesheet" href="/guide.css?v=20">
 
+<style>
+.burger{display:none}
+@media (min-width:900px){.nav .links a:not(.btn){display:inline-block;padding:12px 4px}}
+@media (max-width:899px){
+  .burger{all:unset;-webkit-tap-highlight-color:transparent;box-sizing:border-box;cursor:pointer;display:grid;align-content:center;justify-items:end;gap:5px;width:44px;height:44px;padding:0 6px;position:relative;z-index:2;align-self:center;margin-right:-6px}
+  .burger i{display:block;height:1.5px;background:var(--ink);transition:transform .35s cubic-bezier(.2,.7,.2,1),opacity .2s,width .35s}
+  .burger i:nth-child(1){width:26px}.burger i:nth-child(2){width:17px}.burger i:nth-child(3){width:26px}
+  .burger:focus-visible{outline:2px solid var(--oak);outline-offset:2px}
+  .nav.menu-open .burger i:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+  .nav.menu-open .burger i:nth-child(2){opacity:0;width:0}
+  .nav.menu-open .burger i:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+  .nav .links{position:absolute;top:calc(100% - 4px);right:clamp(16px,4vw,44px);left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:0;width:max-content;min-width:168px;max-width:calc(100vw - 32px);padding:6px 18px 16px;background:var(--paper);border:0;border-radius:4px;box-shadow:0 10px 30px rgba(31,29,26,.13),0 1px 3px rgba(31,29,26,.08);
+    opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .25s ease,transform .3s cubic-bezier(.2,.7,.2,1),visibility 0s .3s;align-self:auto}
+  .nav.menu-open .links{opacity:1;visibility:visible;transform:none;transition:opacity .25s ease,transform .3s cubic-bezier(.2,.7,.2,1)}
+  .nav .links a:not(.btn){display:block;width:100%;text-align:right;padding:13px 2px;border-bottom:1px solid var(--hair);font-size:16px;line-height:1.2;color:var(--ink)}
+  .nav .links .btn{display:inline-flex;justify-content:center;margin-top:12px;font-size:14px;padding:12px 14px}
+}
+</style>
 </head>
 <body>
 <header class="nav">
@@ -55,9 +73,10 @@
     </svg></a>
   <button class="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mainNav"><i></i><i></i><i></i></button>
   <nav class="links" id="mainNav" aria-label="Main">
+    <a href="/?panel=about">About</a>
     <a href="/designs">Designs</a>
     <a href="/house-plans">Guides</a>
-    <a class="btn" href="/#brief">Share your requirements <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 7h11M8 3l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
+    <a class="btn" href="/?panel=brief">Share your requirements <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 7h11M8 3l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
   </nav>
 </header>
 <main class="g" id="top"><div class="wrap"><p class="eyebrow">404</p><h1>This page is not on the plan.</h1>

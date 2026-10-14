@@ -137,7 +137,7 @@ details p{padding:0 0 20px;color:var(--fg2);max-width:62ch}
 .burger{display:none}
 @media (min-width:900px){.nav .links a:not(.btn){display:inline-block;padding:12px 4px}}
 @media (max-width:899px){
-  .burger{all:unset;box-sizing:border-box;cursor:pointer;display:grid;align-content:center;justify-items:end;gap:5px;width:44px;height:44px;padding:0 6px;position:relative;z-index:2;align-self:center;margin-right:-6px}
+  .burger{all:unset;-webkit-tap-highlight-color:transparent;box-sizing:border-box;cursor:pointer;display:grid;align-content:center;justify-items:end;gap:5px;width:44px;height:44px;padding:0 6px;position:relative;z-index:2;align-self:center;margin-right:-6px}
   .burger i{display:block;height:1.5px;background:var(--ink);transition:transform .35s cubic-bezier(.2,.7,.2,1),opacity .2s,width .35s}
   .burger i:nth-child(1){width:26px}.burger i:nth-child(2){width:17px}.burger i:nth-child(3){width:26px}
   .burger:focus-visible{outline:2px solid var(--oak);outline-offset:2px}
