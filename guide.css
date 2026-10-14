@@ -105,6 +105,9 @@ details p{padding:0 0 20px;color:var(--fg2);max-width:62ch}
 .guides a:hover{color:var(--ink);text-decoration:underline}
 .foot{margin-top:40px;padding-top:18px;border-top:1px solid var(--hair);display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;font:400 11px/1.4 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--graphite)}
 
+/* tap targets */
+.links a:not(.btn){display:inline-block;padding:12px 4px}
+
 /* animated logo (same as the homepage) */
 /* logo: the house builds itself on its plot line, holds, and rebuilds (independent of scroll) */
 .lg-draw{stroke-dasharray:var(--L);stroke-dashoffset:0}
