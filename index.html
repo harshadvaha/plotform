@@ -276,18 +276,18 @@ footer h2{font-size:clamp(30px,3.8vw,52px);margin:22px 0 30px}
 .burger{display:none}
 @media (min-width:900px){.nav .links a:not(.btn){display:inline-block;padding:12px 4px}}
 @media (max-width:899px){
-  .burger{all:unset;box-sizing:border-box;cursor:pointer;display:grid;align-content:center;justify-items:end;gap:5px;width:48px;height:36px;padding:0 11px;border:1.3px solid var(--ink);border-radius:2px;background:var(--paper);position:relative;z-index:2;align-self:center}
-  .burger i{display:block;height:1.4px;background:var(--ink);transition:transform .35s cubic-bezier(.2,.7,.2,1),opacity .2s,width .35s}
-  .burger i:nth-child(1){width:24px}.burger i:nth-child(2){width:15px}.burger i:nth-child(3){width:24px}
-  .burger::after{content:"";position:absolute;left:5px;bottom:-1.3px;width:7px;height:1.3px;background:var(--oak)}
-  .nav.menu-open .burger i:nth-child(1){transform:translateY(6.4px) rotate(45deg)}
+  .burger{all:unset;box-sizing:border-box;cursor:pointer;display:grid;align-content:center;justify-items:end;gap:5px;width:44px;height:44px;padding:0 6px;position:relative;z-index:2;align-self:center;margin-right:-6px}
+  .burger i{display:block;height:1.5px;background:var(--ink);transition:transform .35s cubic-bezier(.2,.7,.2,1),opacity .2s,width .35s}
+  .burger i:nth-child(1){width:26px}.burger i:nth-child(2){width:17px}.burger i:nth-child(3){width:26px}
+  .burger:focus-visible{outline:2px solid var(--oak);outline-offset:2px}
+  .nav.menu-open .burger i:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
   .nav.menu-open .burger i:nth-child(2){opacity:0;width:0}
-  .nav.menu-open .burger i:nth-child(3){transform:translateY(-6.4px) rotate(-45deg)}
-  .nav .links{position:absolute;top:calc(100% - 6px);right:clamp(16px,4vw,44px);left:auto;display:flex;flex-direction:column;align-items:stretch;gap:0;min-width:236px;padding:6px 14px 14px;background:var(--paper);border:1.3px solid var(--ink);border-radius:2px;
-    opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .25s ease,transform .3s cubic-bezier(.2,.7,.2,1),visibility 0s .3s;align-self:auto;padding-bottom:14px}
+  .nav.menu-open .burger i:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+  .nav .links{position:absolute;top:calc(100% - 4px);right:clamp(16px,4vw,44px);left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:0;width:max-content;min-width:168px;max-width:calc(100vw - 32px);padding:6px 18px 16px;background:var(--paper);border:0;border-radius:4px;box-shadow:0 10px 30px rgba(31,29,26,.13),0 1px 3px rgba(31,29,26,.08);
+    opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .25s ease,transform .3s cubic-bezier(.2,.7,.2,1),visibility 0s .3s;align-self:auto}
   .nav.menu-open .links{opacity:1;visibility:visible;transform:none;transition:opacity .25s ease,transform .3s cubic-bezier(.2,.7,.2,1)}
-  .nav .links a:not(.btn){display:block;padding:14px 2px;border-bottom:1px solid var(--hair);font-size:16px;line-height:1.2;color:var(--ink)}
-  .nav .links .btn{display:inline-flex;justify-content:center;margin-top:12px}
+  .nav .links a:not(.btn){display:block;width:100%;text-align:right;padding:13px 2px;border-bottom:1px solid var(--hair);font-size:16px;line-height:1.2;color:var(--ink)}
+  .nav .links .btn{display:inline-flex;justify-content:center;margin-top:12px;font-size:14px;padding:12px 14px}
 }
 </style>
 </head>

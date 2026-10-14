@@ -53,7 +53,8 @@
       </g>
       <text id="brandWord" x="142" y="66" fill="currentColor" font-size="52" letter-spacing="17.5" style="font-family:var(--f-display);font-weight:400">PLOTFORM</text>
     </svg></a>
-  <nav class="links" aria-label="Main">
+  <button class="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mainNav"><i></i><i></i><i></i></button>
+  <nav class="links" id="mainNav" aria-label="Main">
     <a href="/designs">Designs</a>
     <a href="/house-plans">Guides</a>
     <a class="btn" href="/#brief">Share your requirements <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 7h11M8 3l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
@@ -73,5 +74,14 @@
 </footer>
 <a class="wa-fab" href="https://wa.me/919898667753?text=Hi%20Plotform%2C%20my%20plot%20is%20__%20x%20__%20ft%2C%20facing%20__%2C%20in%20__%20%28city%29." target="_blank" rel="noopener" aria-label="Chat with Plotform on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 18.8z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9 8.5c0 3.5 2.6 6.5 6.5 6.5l1-1.6-2-1-1 .9c-1.2-.5-2.3-1.6-2.8-2.8l.9-1-1-2z" fill="currentColor"/></svg><span>WhatsApp</span></a>
 <style>.wa-fab{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:60;display:inline-flex;align-items:center;gap:8px;padding:12px 16px;border-radius:999px;background:#1f7a4d;color:#fff;text-decoration:none;font:500 14px/1 "IBM Plex Sans",system-ui,sans-serif;box-shadow:0 4px 14px rgba(0,0,0,.18)}.wa-fab:hover{background:#176139}.wa-fab svg{width:20px;height:20px}@media (max-width:480px){.wa-fab span{display:none}.wa-fab{padding:14px}}</style>
+<script>
+(() => { const nav = document.querySelector('.nav'), b = nav && nav.querySelector('.burger'); if(!b) return;
+  const set = o => { nav.classList.toggle('menu-open', o); b.setAttribute('aria-expanded', o); };
+  b.addEventListener('click', e => { e.stopPropagation(); set(!nav.classList.contains('menu-open')); });
+  nav.querySelectorAll('.links a').forEach(a => a.addEventListener('click', () => set(false)));
+  document.addEventListener('click', e => { if(!nav.contains(e.target)) set(false); });
+  document.addEventListener('keydown', e => { if(e.key === 'Escape'){ set(false); b.focus(); } });
+})();
+</script>
 </body>
 </html>
