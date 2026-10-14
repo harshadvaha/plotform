@@ -33,7 +33,26 @@
 </head>
 <body>
 <header class="nav">
-  <a class="brand" href="/" aria-label="Plotform home"><svg viewBox="0 0 560 74" aria-hidden="true"><path d="M2 66H118M8 59V73" stroke="currentColor" stroke-width="1.4" fill="none"/><path d="M26 40L78 15V40Z" fill="#efe8dc"/><path d="M26.8 40.8H61.2V65.2H26.8Z" fill="#fff"/><path d="M27 50H44V66H27Z" fill="#efe8dc"/><path d="M62 40H78V66H62Z" fill="#a08a6c"/><path d="M65 40V66M68 40V66M71 40V66M74 40V66" stroke="#7d6648" stroke-width=".8"/><path d="M62 52H68V66H62Z" fill="#1f1d1a"/><path d="M26 66V40H62V66" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M35.5 66V50" fill="none" stroke="currentColor" stroke-width="1"/><path d="M78 40H104V66M78 40H107" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M78 66V6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M78 16L16 46" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square"/><text x="142" y="66" fill="currentColor" font-size="52" letter-spacing="17.5" font-family="Jost,sans-serif">PLOTFORM</text></svg></a>
+  <a class="brand" href="/" aria-label="Plotform home"><svg id="brandSvg" viewBox="0 0 560 74" aria-hidden="true">
+      <path d="M2 66H118M8 59V73" stroke="currentColor" stroke-width="1.4" fill="none"/>
+      <g class="lg">
+        <path class="lg-fill f1" d="M26 40L78 15V40Z" style="fill:var(--logo-soft)"/>
+        <path class="lg-fill f2" d="M26.8 40.8H61.2V65.2H26.8Z" style="fill:var(--paper)"/>
+        <path class="lg-fill f3" d="M27 50H44V66H27Z" style="fill:var(--logo-soft)"/>
+        <path class="lg-fill f4" d="M62 40H78V66H62Z" fill="#a08a6c"/>
+        <path class="lg-fill s1" d="M65 40V66" stroke="#7d6648" stroke-width=".8"/>
+        <path class="lg-fill s2" d="M68 40V66" stroke="#7d6648" stroke-width=".8"/>
+        <path class="lg-fill s3" d="M71 40V66" stroke="#7d6648" stroke-width=".8"/>
+        <path class="lg-fill s4" d="M74 40V66" stroke="#7d6648" stroke-width=".8"/>
+        <path class="lg-fill dr" d="M62 52H68V66H62Z" fill="#1f1d1a"/>
+        <path class="lg-draw d1" d="M26 66V40H62V66" fill="none" stroke="currentColor" stroke-width="1.6"/>
+        <path class="lg-draw d2" d="M35.5 66V50" fill="none" stroke="currentColor" stroke-width="1"/>
+        <path class="lg-draw d3" d="M78 40H104V66M78 40H107" fill="none" stroke="currentColor" stroke-width="1.4"/>
+        <path class="lg-draw d4" d="M78 66V6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+        <path class="lg-draw d5" d="M78 16L16 46" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square"/>
+      </g>
+      <text id="brandWord" x="142" y="66" fill="currentColor" font-size="52" letter-spacing="17.5" style="font-family:var(--f-display);font-weight:400">PLOTFORM</text>
+    </svg></a>
   <nav class="links" aria-label="Main">
     <a href="/designs">Designs</a>
     <a href="/house-plans">Guides</a>

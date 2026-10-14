@@ -104,3 +104,28 @@ details p{padding:0 0 20px;color:var(--fg2);max-width:62ch}
 .guides a{color:var(--graphite);text-decoration:none}
 .guides a:hover{color:var(--ink);text-decoration:underline}
 .foot{margin-top:40px;padding-top:18px;border-top:1px solid var(--hair);display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;font:400 11px/1.4 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--graphite)}
+
+/* animated logo (same as the homepage) */
+/* logo: the house builds itself on its plot line, holds, and rebuilds (independent of scroll) */
+.lg-draw{stroke-dasharray:var(--L);stroke-dashoffset:0}
+.lg .d1{--L:88}.lg .d2{--L:16}.lg .d3{--L:81}.lg .d4{--L:60}.lg .d5{--L:69}   /* exact lengths of each line in SVG units */
+.lg .d1{animation:ld1 9s cubic-bezier(.5,0,.3,1) infinite}.lg .d2{animation:ld2 9s ease-in-out infinite}.lg .d3{animation:ld3 9s cubic-bezier(.5,0,.3,1) infinite}
+.lg .d4{animation:ld4 9s cubic-bezier(.5,0,.3,1) infinite}.lg .d5{animation:ld5 9s cubic-bezier(.6,0,.2,1) infinite}
+.lg .f1{animation:lf1 9s ease infinite}.lg .f2{animation:lf2 9s ease infinite}.lg .f3{animation:lf3 9s ease infinite}.lg .f4{animation:lf4 9s ease infinite}
+.lg .s1{animation:ls1 9s ease infinite}.lg .s2{animation:ls2 9s ease infinite}.lg .s3{animation:ls3 9s ease infinite}.lg .s4{animation:ls4 9s ease infinite}.lg .dr{animation:ldr 9s ease infinite}
+@keyframes ld1{0%,3%{stroke-dashoffset:var(--L);opacity:1}17%,86%{stroke-dashoffset:0;opacity:1}95%,100%{stroke-dashoffset:0;opacity:0}}
+@keyframes ld2{0%,14%{stroke-dashoffset:var(--L);opacity:1}20%,86%{stroke-dashoffset:0;opacity:1}95%,100%{stroke-dashoffset:0;opacity:0}}
+@keyframes ld3{0%,12%{stroke-dashoffset:var(--L);opacity:1}26%,86%{stroke-dashoffset:0;opacity:1}95%,100%{stroke-dashoffset:0;opacity:0}}
+@keyframes ld4{0%,18%{stroke-dashoffset:var(--L);opacity:1}30%,86%{stroke-dashoffset:0;opacity:1}95%,100%{stroke-dashoffset:0;opacity:0}}
+@keyframes ld5{0%,28%{stroke-dashoffset:var(--L);opacity:1}40%,86%{stroke-dashoffset:0;opacity:1}95%,100%{stroke-dashoffset:0;opacity:0}}
+@keyframes lf1{0%,38%{opacity:0}46%,86%{opacity:1}95%,100%{opacity:0}}
+@keyframes lf2{0%,10%{opacity:0}22%,86%{opacity:1}95%,100%{opacity:0}}
+@keyframes lf3{0%,40%{opacity:0}48%,86%{opacity:1}95%,100%{opacity:0}}
+@keyframes lf4{0%,44%{opacity:0}50%,86%{opacity:1}95%,100%{opacity:0}}
+@keyframes ls1{0%,50%{opacity:0}53%,86%{opacity:1}95%,100%{opacity:0}}
+@keyframes ls2{0%,52%{opacity:0}55%,86%{opacity:1}95%,100%{opacity:0}}
+@keyframes ls3{0%,54%{opacity:0}57%,86%{opacity:1}95%,100%{opacity:0}}
+@keyframes ls4{0%,56%{opacity:0}59%,86%{opacity:1}95%,100%{opacity:0}}
+@keyframes ldr{0%,60%{opacity:0}66%,86%{opacity:1}95%,100%{opacity:0}}
+@keyframes lgDraw{from{stroke-dashoffset:var(--L)}to{stroke-dashoffset:0}}
+@keyframes lgFade{from{opacity:0}to{opacity:1}}

@@ -53,9 +53,22 @@
 .tabs button[aria-selected="true"]::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--ink)}
 .tabs button:focus-visible{outline:2px solid var(--oak);outline-offset:-2px}
 .stage{position:relative;aspect-ratio:4/3;cursor:pointer;overflow:hidden}
-.stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity .45s ease}
-.stage img.on{opacity:1}
-.stage .hint{position:absolute;right:12px;bottom:10px;font:400 11px/1 var(--f-mono);letter-spacing:.06em;color:var(--graphite);background:rgba(255,255,255,.85);padding:6px 8px;pointer-events:none}
+.stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;will-change:opacity,transform;transform-origin:50% 55%}
+.scrub{padding:14px 18px 12px;border-top:1px solid var(--hair)}
+.scrub input{-webkit-appearance:none;appearance:none;width:100%;height:28px;background:transparent;margin:0;cursor:grab;touch-action:pan-y}
+.scrub input:active{cursor:grabbing}
+.scrub input::-webkit-slider-runnable-track{height:2px;background:linear-gradient(90deg,var(--ink) var(--p,0%),var(--line2) var(--p,0%))}
+.scrub input::-moz-range-track{height:2px;background:var(--line2)}
+.scrub input::-moz-range-progress{height:2px;background:var(--ink)}
+.scrub input::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:18px;margin-top:-8px;background:#fff;border:1.5px solid var(--ink);border-radius:2px;box-shadow:inset 0 0 0 3px #fff,inset 0 0 0 4.5px var(--oak)}
+.scrub input::-moz-range-thumb{width:24px;height:16px;background:#fff;border:1.5px solid var(--ink);border-radius:2px;box-shadow:inset 0 0 0 3px #fff,inset 0 0 0 4.5px var(--oak)}
+.scrub input:focus-visible{outline:2px solid var(--oak);outline-offset:4px}
+.ticks{display:flex;justify-content:space-between;font:400 11px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--graphite);margin-top:6px}
+.ticks span{flex:1}.ticks span:nth-child(2){text-align:center}.ticks span:last-child{text-align:right}
+.house-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:12px 32px;margin-bottom:22px}
+.house-head .facts{margin-bottom:0}
+.house-head .btn{flex:none;margin-bottom:2px}
+@media (max-width:620px){.house-head .btn{width:100%;justify-content:center}}
 .cap .full{color:var(--oak-deep);white-space:nowrap;text-underline-offset:3px}
 .cap{padding:11px 14px;border-top:1px solid var(--hair);font:400 12px/1.5 var(--f-mono);color:var(--graphite);min-height:3.2em}
 .brief-k{font:500 11px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--oak-deep);margin:0 0 10px}
@@ -68,12 +81,31 @@
 .acts{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .acts .lnk{font-size:14px;color:var(--oak-deep);text-underline-offset:3px}
 .btn.wa{background:#1f7a4d}.btn.wa:hover{background:#176139}
-@media (prefers-reduced-motion:reduce){.stage img{transition:none}}
+
 </style>
 </head>
 <body>
 <header class="nav">
-  <a class="brand" href="/" aria-label="Plotform home"><svg viewBox="0 0 560 74" aria-hidden="true"><path d="M2 66H118M8 59V73" stroke="currentColor" stroke-width="1.4" fill="none"/><path d="M26 40L78 15V40Z" fill="#efe8dc"/><path d="M26.8 40.8H61.2V65.2H26.8Z" fill="#fff"/><path d="M27 50H44V66H27Z" fill="#efe8dc"/><path d="M62 40H78V66H62Z" fill="#a08a6c"/><path d="M65 40V66M68 40V66M71 40V66M74 40V66" stroke="#7d6648" stroke-width=".8"/><path d="M62 52H68V66H62Z" fill="#1f1d1a"/><path d="M26 66V40H62V66" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M35.5 66V50" fill="none" stroke="currentColor" stroke-width="1"/><path d="M78 40H104V66M78 40H107" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M78 66V6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M78 16L16 46" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square"/><text x="142" y="66" fill="currentColor" font-size="52" letter-spacing="17.5" font-family="Jost,sans-serif">PLOTFORM</text></svg></a>
+  <a class="brand" href="/" aria-label="Plotform home"><svg id="brandSvg" viewBox="0 0 560 74" aria-hidden="true">
+      <path d="M2 66H118M8 59V73" stroke="currentColor" stroke-width="1.4" fill="none"/>
+      <g class="lg">
+        <path class="lg-fill f1" d="M26 40L78 15V40Z" style="fill:var(--logo-soft)"/>
+        <path class="lg-fill f2" d="M26.8 40.8H61.2V65.2H26.8Z" style="fill:var(--paper)"/>
+        <path class="lg-fill f3" d="M27 50H44V66H27Z" style="fill:var(--logo-soft)"/>
+        <path class="lg-fill f4" d="M62 40H78V66H62Z" fill="#a08a6c"/>
+        <path class="lg-fill s1" d="M65 40V66" stroke="#7d6648" stroke-width=".8"/>
+        <path class="lg-fill s2" d="M68 40V66" stroke="#7d6648" stroke-width=".8"/>
+        <path class="lg-fill s3" d="M71 40V66" stroke="#7d6648" stroke-width=".8"/>
+        <path class="lg-fill s4" d="M74 40V66" stroke="#7d6648" stroke-width=".8"/>
+        <path class="lg-fill dr" d="M62 52H68V66H62Z" fill="#1f1d1a"/>
+        <path class="lg-draw d1" d="M26 66V40H62V66" fill="none" stroke="currentColor" stroke-width="1.6"/>
+        <path class="lg-draw d2" d="M35.5 66V50" fill="none" stroke="currentColor" stroke-width="1"/>
+        <path class="lg-draw d3" d="M78 40H104V66M78 40H107" fill="none" stroke="currentColor" stroke-width="1.4"/>
+        <path class="lg-draw d4" d="M78 66V6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+        <path class="lg-draw d5" d="M78 16L16 46" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square"/>
+      </g>
+      <text id="brandWord" x="142" y="66" fill="currentColor" font-size="52" letter-spacing="17.5" style="font-family:var(--f-display);font-weight:400">PLOTFORM</text>
+    </svg></a>
   <nav class="links" aria-label="Main">
     <a href="/designs">Designs</a>
     <a href="/house-plans">Guides</a>
@@ -87,17 +119,22 @@
     <p class="eyebrow">Concept designs</p>
     <h1>Five homes, five plots, five ways of living.</h1>
     <p class="lead">From a 20 × 30 ft rental home in Bengaluru to a 50 × 80 ft kothi in Punjab: each design starts from a plot size, a facing and a family's brief, and goes from plan to 3D plan to the finished elevation, exactly the way we work on yours.</p>
-    <p class="dz-note">These are concept designs drawn by Plotform to show our process and range. The briefs are typical of what families ask us for; they are not client projects.</p>
     <nav class="dz-jump" aria-label="Jump to a design"><a href="#kerala">01 · Kerala</a><a href="#jaipur">02 · Jaipur</a><a href="#ahmedabad">03 · Ahmedabad</a><a href="#bengaluru">04 · Bengaluru</a><a href="#punjab">05 · Punjab</a></nav>
   </div>
   <section class="house" id="kerala" aria-labelledby="h-kerala">
-  <p class="eyebrow">Concept 01 · Kerala</p>
-  <h2 id="h-kerala">Courtyard home, Kerala</h2>
-  <ul class="facts"><li>40 × 60 ft</li><li>East facing</li><li>Single storey</li><li>3 bedrooms + pooja</li><li>About 1,110 sq ft built-up</li></ul>
+  <div class="house-head">
+    <div>
+      <p class="eyebrow">Concept 01 · Kerala</p>
+      <h2 id="h-kerala">Courtyard home, Kerala</h2>
+      <ul class="facts"><li>40 × 60 ft</li><li>East facing</li><li>Single storey</li><li>3 bedrooms + pooja</li><li>About 1,110 sq ft built-up</li></ul>
+    </div>
+    <a class="btn wa" href="https://wa.me/919898667753?text=Hi%20Plotform%2C%20I%20liked%20Concept%2001%20%28Kerala%20courtyard%20home%29.%20My%20plot%20is%20__%20x%20__%20ft%2C%20facing%20__%2C%20in%20__%20%28city%29." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 18.8z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg> Get this for your plot</a>
+  </div>
   <div class="house-grid">
     <div class="viewer" data-viewer>
       <div class="tabs" role="tablist" aria-label="Concept 01 views"><button role="tab" aria-selected="true" data-i="0"><span>01</span>Plan</button><button role="tab" aria-selected="false" data-i="1"><span>02</span>3D plan</button><button role="tab" aria-selected="false" data-i="2"><span>03</span>Elevation</button></div>
-      <div class="stage" role="tabpanel"><img src="/designs-kerala-plan.svg" alt="Concept 01, Kerala courtyard home: plan. 2D ground floor plan, 40 × 60 ft, east facing, furnished." width="1400" height="1050" class=on loading="eager" decoding="async" data-cap="2D ground floor plan, 40 × 60 ft, east facing, furnished."><img src="/designs-kerala-3d.jpg" alt="Concept 01, Kerala courtyard home: 3d plan. The same ground floor in 3D, cut open at ceiling height, with finishes and furniture." width="1400" height="1050"  loading="lazy" decoding="async" data-cap="The same ground floor in 3D, cut open at ceiling height, with finishes and furniture."><img src="/designs-kerala-elev.jpg" alt="Concept 01, Kerala courtyard home: elevation. The finished house from the street: roof, materials, openings and landscape." width="1400" height="1050"  loading="lazy" decoding="async" data-cap="The finished house from the street: roof, materials, openings and landscape."><span class="hint">Tap for next view</span></div>
+      <div class="stage" role="tabpanel"><img src="/designs-kerala-plan.svg" alt="Concept 01, Kerala courtyard home: plan. 2D ground floor plan, 40 × 60 ft, east facing, furnished." width="1400" height="1050" style="opacity:1" loading="eager" decoding="async" data-cap="2D ground floor plan, 40 × 60 ft, east facing, furnished."><img src="/designs-kerala-3d.jpg" alt="Concept 01, Kerala courtyard home: 3d plan. The same ground floor in 3D, cut open at ceiling height, with finishes and furniture." width="1400" height="1050" style="opacity:0" loading="lazy" decoding="async" data-cap="The same ground floor in 3D, cut open at ceiling height, with finishes and furniture."><img src="/designs-kerala-elev.jpg" alt="Concept 01, Kerala courtyard home: elevation. The finished house from the street: roof, materials, openings and landscape." width="1400" height="1050" style="opacity:0" loading="lazy" decoding="async" data-cap="The finished house from the street: roof, materials, openings and landscape."></div>
+      <div class="scrub"><input type="range" min="0" max="200" step="1" value="0" aria-label="Slide from plan to 3D plan to elevation"><div class="ticks" aria-hidden="true"><span>Plan</span><span>3D plan</span><span>Elevation</span></div></div>
       <p class="cap"><span>2D ground floor plan, 40 × 60 ft, east facing, furnished.</span> <a class="full" href="/designs-kerala-plan.svg" target="_blank" rel="noopener">Open full size</a></p>
     </div>
     <div>
@@ -106,17 +143,23 @@
       <p class="brief-k">How the design answers it</p>
       <ul class="moves"><li>A <b>nadumuttam</b> (open courtyard) sits at the centre, so every room borrows light and air from it.</li><li>Clay-tile roofs slope in to the courtyard and out to deep eaves that keep the walls dry and shaded through the monsoon.</li><li>A <b>poomukham</b> sit-out with a timber gable faces the street, on a laterite plinth with a low laterite boundary wall.</li><li>Kitchen in the south-east, master bedroom in the south-west and pooja in the north-east, as Vastu asks.</li></ul>
       <p class="fl">Single storey. Plan, 3D plan and elevation show the whole house.</p>
-      <div class="acts"><a class="btn wa" href="https://wa.me/919898667753?text=Hi%20Plotform%2C%20I%20liked%20Concept%2001%20%28Kerala%20courtyard%20home%29.%20My%20plot%20is%20__%20x%20__%20ft%2C%20facing%20__%2C%20in%20__%20%28city%29." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 18.8z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg> Get this for your plot</a><a class="lnk" href="/40x60-house-plan">40x60 house plan guide</a></div>
+      <div class="acts"><a class="lnk" href="/40x60-house-plan">40x60 house plan guide</a></div>
     </div>
   </div>
 </section><section class="house" id="jaipur" aria-labelledby="h-jaipur">
-  <p class="eyebrow">Concept 02 · Jaipur</p>
-  <h2 id="h-jaipur">Haveli-inspired home, Jaipur</h2>
-  <ul class="facts"><li>30 × 50 ft</li><li>North facing</li><li>Ground + 1</li><li>4 bedrooms</li><li>About 1,540 sq ft built-up</li></ul>
+  <div class="house-head">
+    <div>
+      <p class="eyebrow">Concept 02 · Jaipur</p>
+      <h2 id="h-jaipur">Haveli-inspired home, Jaipur</h2>
+      <ul class="facts"><li>30 × 50 ft</li><li>North facing</li><li>Ground + 1</li><li>4 bedrooms</li><li>About 1,540 sq ft built-up</li></ul>
+    </div>
+    <a class="btn wa" href="https://wa.me/919898667753?text=Hi%20Plotform%2C%20I%20liked%20Concept%2002%20%28Jaipur%20haveli-inspired%20home%29.%20My%20plot%20is%20__%20x%20__%20ft%2C%20facing%20__%2C%20in%20__%20%28city%29." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 18.8z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg> Get this for your plot</a>
+  </div>
   <div class="house-grid">
     <div class="viewer" data-viewer>
       <div class="tabs" role="tablist" aria-label="Concept 02 views"><button role="tab" aria-selected="true" data-i="0"><span>01</span>Plan</button><button role="tab" aria-selected="false" data-i="1"><span>02</span>3D plan</button><button role="tab" aria-selected="false" data-i="2"><span>03</span>Elevation</button></div>
-      <div class="stage" role="tabpanel"><img src="/designs-jaipur-plan.svg" alt="Concept 02, Jaipur haveli-inspired home: plan. 2D ground floor plan, 30 × 50 ft, north facing, furnished." width="1400" height="1050" class=on loading="lazy" decoding="async" data-cap="2D ground floor plan, 30 × 50 ft, north facing, furnished."><img src="/designs-jaipur-3d.jpg" alt="Concept 02, Jaipur haveli-inspired home: 3d plan. The same ground floor in 3D, cut open at ceiling height, with finishes and furniture." width="1400" height="1050"  loading="lazy" decoding="async" data-cap="The same ground floor in 3D, cut open at ceiling height, with finishes and furniture."><img src="/designs-jaipur-elev.jpg" alt="Concept 02, Jaipur haveli-inspired home: elevation. The finished house from the street: roof, materials, openings and landscape." width="1400" height="1050"  loading="lazy" decoding="async" data-cap="The finished house from the street: roof, materials, openings and landscape."><span class="hint">Tap for next view</span></div>
+      <div class="stage" role="tabpanel"><img src="/designs-jaipur-plan.svg" alt="Concept 02, Jaipur haveli-inspired home: plan. 2D ground floor plan, 30 × 50 ft, north facing, furnished." width="1400" height="1050" style="opacity:1" loading="lazy" decoding="async" data-cap="2D ground floor plan, 30 × 50 ft, north facing, furnished."><img src="/designs-jaipur-3d.jpg" alt="Concept 02, Jaipur haveli-inspired home: 3d plan. The same ground floor in 3D, cut open at ceiling height, with finishes and furniture." width="1400" height="1050" style="opacity:0" loading="lazy" decoding="async" data-cap="The same ground floor in 3D, cut open at ceiling height, with finishes and furniture."><img src="/designs-jaipur-elev.jpg" alt="Concept 02, Jaipur haveli-inspired home: elevation. The finished house from the street: roof, materials, openings and landscape." width="1400" height="1050" style="opacity:0" loading="lazy" decoding="async" data-cap="The finished house from the street: roof, materials, openings and landscape."></div>
+      <div class="scrub"><input type="range" min="0" max="200" step="1" value="0" aria-label="Slide from plan to 3D plan to elevation"><div class="ticks" aria-hidden="true"><span>Plan</span><span>3D plan</span><span>Elevation</span></div></div>
       <p class="cap"><span>2D ground floor plan, 30 × 50 ft, north facing, furnished.</span> <a class="full" href="/designs-jaipur-plan.svg" target="_blank" rel="noopener">Open full size</a></p>
     </div>
     <div>
@@ -125,17 +168,23 @@
       <p class="brief-k">How the design answers it</p>
       <ul class="moves"><li>A double-height <b>chowk</b> with a skylight is the light well and gathering place, with a jhoola for the evenings.</li><li>Jharokha bays and sandstone jaali screens filter the street and the harsh sun on the front.</li><li>The <b>baithak</b> sits at the front with its own door, so guests never cross the family spaces.</li><li>A chhatri and a kangura parapet crown the terrace; kitchen in the south-east, parents in the south-west.</li></ul>
       <p class="fl">Ground floor shown in the plan and 3D plan. The upper floor holds three bedrooms around the open chowk.</p>
-      <div class="acts"><a class="btn wa" href="https://wa.me/919898667753?text=Hi%20Plotform%2C%20I%20liked%20Concept%2002%20%28Jaipur%20haveli-inspired%20home%29.%20My%20plot%20is%20__%20x%20__%20ft%2C%20facing%20__%2C%20in%20__%20%28city%29." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 18.8z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg> Get this for your plot</a><a class="lnk" href="/30x50-house-plan">30x50 house plan guide</a></div>
+      <div class="acts"><a class="lnk" href="/30x50-house-plan">30x50 house plan guide</a></div>
     </div>
   </div>
 </section><section class="house" id="ahmedabad" aria-labelledby="h-ahmedabad">
-  <p class="eyebrow">Concept 03 · Ahmedabad</p>
-  <h2 id="h-ahmedabad">Vastu home with otla, Ahmedabad</h2>
-  <ul class="facts"><li>30 × 40 ft</li><li>East facing</li><li>Ground + 1</li><li>3 bedrooms</li><li>About 1,170 sq ft built-up</li></ul>
+  <div class="house-head">
+    <div>
+      <p class="eyebrow">Concept 03 · Ahmedabad</p>
+      <h2 id="h-ahmedabad">Vastu home with otla, Ahmedabad</h2>
+      <ul class="facts"><li>30 × 40 ft</li><li>East facing</li><li>Ground + 1</li><li>3 bedrooms</li><li>About 1,170 sq ft built-up</li></ul>
+    </div>
+    <a class="btn wa" href="https://wa.me/919898667753?text=Hi%20Plotform%2C%20I%20liked%20Concept%2003%20%28Ahmedabad%20vastu%20home%20with%20otla%29.%20My%20plot%20is%20__%20x%20__%20ft%2C%20facing%20__%2C%20in%20__%20%28city%29." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 18.8z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg> Get this for your plot</a>
+  </div>
   <div class="house-grid">
     <div class="viewer" data-viewer>
       <div class="tabs" role="tablist" aria-label="Concept 03 views"><button role="tab" aria-selected="true" data-i="0"><span>01</span>Plan</button><button role="tab" aria-selected="false" data-i="1"><span>02</span>3D plan</button><button role="tab" aria-selected="false" data-i="2"><span>03</span>Elevation</button></div>
-      <div class="stage" role="tabpanel"><img src="/designs-ahmedabad-plan.svg" alt="Concept 03, Ahmedabad vastu home with otla: plan. 2D ground floor plan, 30 × 40 ft, east facing, furnished." width="1400" height="1050" class=on loading="lazy" decoding="async" data-cap="2D ground floor plan, 30 × 40 ft, east facing, furnished."><img src="/designs-ahmedabad-3d.jpg" alt="Concept 03, Ahmedabad vastu home with otla: 3d plan. The same ground floor in 3D, cut open at ceiling height, with finishes and furniture." width="1400" height="1050"  loading="lazy" decoding="async" data-cap="The same ground floor in 3D, cut open at ceiling height, with finishes and furniture."><img src="/designs-ahmedabad-elev.jpg" alt="Concept 03, Ahmedabad vastu home with otla: elevation. The finished house from the street: roof, materials, openings and landscape." width="1400" height="1050"  loading="lazy" decoding="async" data-cap="The finished house from the street: roof, materials, openings and landscape."><span class="hint">Tap for next view</span></div>
+      <div class="stage" role="tabpanel"><img src="/designs-ahmedabad-plan.svg" alt="Concept 03, Ahmedabad vastu home with otla: plan. 2D ground floor plan, 30 × 40 ft, east facing, furnished." width="1400" height="1050" style="opacity:1" loading="lazy" decoding="async" data-cap="2D ground floor plan, 30 × 40 ft, east facing, furnished."><img src="/designs-ahmedabad-3d.jpg" alt="Concept 03, Ahmedabad vastu home with otla: 3d plan. The same ground floor in 3D, cut open at ceiling height, with finishes and furniture." width="1400" height="1050" style="opacity:0" loading="lazy" decoding="async" data-cap="The same ground floor in 3D, cut open at ceiling height, with finishes and furniture."><img src="/designs-ahmedabad-elev.jpg" alt="Concept 03, Ahmedabad vastu home with otla: elevation. The finished house from the street: roof, materials, openings and landscape." width="1400" height="1050" style="opacity:0" loading="lazy" decoding="async" data-cap="The finished house from the street: roof, materials, openings and landscape."></div>
+      <div class="scrub"><input type="range" min="0" max="200" step="1" value="0" aria-label="Slide from plan to 3D plan to elevation"><div class="ticks" aria-hidden="true"><span>Plan</span><span>3D plan</span><span>Elevation</span></div></div>
       <p class="cap"><span>2D ground floor plan, 30 × 40 ft, east facing, furnished.</span> <a class="full" href="/designs-ahmedabad-plan.svg" target="_blank" rel="noopener">Open full size</a></p>
     </div>
     <div>
@@ -144,17 +193,23 @@
       <p class="brief-k">How the design answers it</p>
       <ul class="moves"><li>A raised <b>otla</b> runs across the front with a <b>hindola</b>, shaded by the balcony above.</li><li>Entrance in the north-east, kitchen in the south-east, parents in the south-west and the stair to the west.</li><li>Exposed brick on the street face and a brick jaali screening the balcony, in Ahmedabad’s brick-and-concrete tradition.</li><li>The car parks parallel to the road inside the front setback, leaving the otla clear.</li></ul>
       <p class="fl">Ground floor shown in the plan and 3D plan. The upper floor holds two bedrooms and the front balcony.</p>
-      <div class="acts"><a class="btn wa" href="https://wa.me/919898667753?text=Hi%20Plotform%2C%20I%20liked%20Concept%2003%20%28Ahmedabad%20vastu%20home%20with%20otla%29.%20My%20plot%20is%20__%20x%20__%20ft%2C%20facing%20__%2C%20in%20__%20%28city%29." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 18.8z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg> Get this for your plot</a><a class="lnk" href="/east-facing-house-plan">East facing house plan guide</a></div>
+      <div class="acts"><a class="lnk" href="/east-facing-house-plan">East facing house plan guide</a></div>
     </div>
   </div>
 </section><section class="house" id="bengaluru" aria-labelledby="h-bengaluru">
-  <p class="eyebrow">Concept 04 · Bengaluru</p>
-  <h2 id="h-bengaluru">Compact rental home, Bengaluru</h2>
-  <ul class="facts"><li>20 × 30 ft</li><li>West facing</li><li>Ground + 2</li><li>Owner 1BHK + rental + office</li><li>About 960 sq ft built-up</li></ul>
+  <div class="house-head">
+    <div>
+      <p class="eyebrow">Concept 04 · Bengaluru</p>
+      <h2 id="h-bengaluru">Compact rental home, Bengaluru</h2>
+      <ul class="facts"><li>20 × 30 ft</li><li>West facing</li><li>Ground + 2</li><li>Owner 1BHK + rental + office</li><li>About 960 sq ft built-up</li></ul>
+    </div>
+    <a class="btn wa" href="https://wa.me/919898667753?text=Hi%20Plotform%2C%20I%20liked%20Concept%2004%20%28Bengaluru%20compact%20rental%20home%29.%20My%20plot%20is%20__%20x%20__%20ft%2C%20facing%20__%2C%20in%20__%20%28city%29." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 18.8z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg> Get this for your plot</a>
+  </div>
   <div class="house-grid">
     <div class="viewer" data-viewer>
       <div class="tabs" role="tablist" aria-label="Concept 04 views"><button role="tab" aria-selected="true" data-i="0"><span>01</span>Plan</button><button role="tab" aria-selected="false" data-i="1"><span>02</span>3D plan</button><button role="tab" aria-selected="false" data-i="2"><span>03</span>Elevation</button></div>
-      <div class="stage" role="tabpanel"><img src="/designs-bengaluru-plan.svg" alt="Concept 04, Bengaluru compact rental home: plan. 2D ground floor plan, 20 × 30 ft, west facing, furnished." width="1400" height="1050" class=on loading="lazy" decoding="async" data-cap="2D ground floor plan, 20 × 30 ft, west facing, furnished."><img src="/designs-bengaluru-3d.jpg" alt="Concept 04, Bengaluru compact rental home: 3d plan. The same ground floor in 3D, cut open at ceiling height, with finishes and furniture." width="1400" height="1050"  loading="lazy" decoding="async" data-cap="The same ground floor in 3D, cut open at ceiling height, with finishes and furniture."><img src="/designs-bengaluru-elev.jpg" alt="Concept 04, Bengaluru compact rental home: elevation. The finished house from the street: roof, materials, openings and landscape." width="1400" height="1050"  loading="lazy" decoding="async" data-cap="The finished house from the street: roof, materials, openings and landscape."><span class="hint">Tap for next view</span></div>
+      <div class="stage" role="tabpanel"><img src="/designs-bengaluru-plan.svg" alt="Concept 04, Bengaluru compact rental home: plan. 2D ground floor plan, 20 × 30 ft, west facing, furnished." width="1400" height="1050" style="opacity:1" loading="lazy" decoding="async" data-cap="2D ground floor plan, 20 × 30 ft, west facing, furnished."><img src="/designs-bengaluru-3d.jpg" alt="Concept 04, Bengaluru compact rental home: 3d plan. The same ground floor in 3D, cut open at ceiling height, with finishes and furniture." width="1400" height="1050" style="opacity:0" loading="lazy" decoding="async" data-cap="The same ground floor in 3D, cut open at ceiling height, with finishes and furniture."><img src="/designs-bengaluru-elev.jpg" alt="Concept 04, Bengaluru compact rental home: elevation. The finished house from the street: roof, materials, openings and landscape." width="1400" height="1050" style="opacity:0" loading="lazy" decoding="async" data-cap="The finished house from the street: roof, materials, openings and landscape."></div>
+      <div class="scrub"><input type="range" min="0" max="200" step="1" value="0" aria-label="Slide from plan to 3D plan to elevation"><div class="ticks" aria-hidden="true"><span>Plan</span><span>3D plan</span><span>Elevation</span></div></div>
       <p class="cap"><span>2D ground floor plan, 20 × 30 ft, west facing, furnished.</span> <a class="full" href="/designs-bengaluru-plan.svg" target="_blank" rel="noopener">Open full size</a></p>
     </div>
     <div>
@@ -163,17 +218,23 @@
       <p class="brief-k">How the design answers it</p>
       <ul class="moves"><li>A <b>separate street door and staircase</b> serve the upper floors, so tenants never pass through the owners’ home.</li><li>Timber louvres screen the stair column on the west face from the afternoon sun.</li><li>The top floor is a home office opening onto a terrace with a pergola and planters.</li><li>Solar panels and the water tank sit on the roof, out of sight from the street.</li></ul>
       <p class="fl">Ground floor (owners’ 1BHK) shown in the plan and 3D plan. First floor: rental 1BHK with balcony. Second floor: office and terrace.</p>
-      <div class="acts"><a class="btn wa" href="https://wa.me/919898667753?text=Hi%20Plotform%2C%20I%20liked%20Concept%2004%20%28Bengaluru%20compact%20rental%20home%29.%20My%20plot%20is%20__%20x%20__%20ft%2C%20facing%20__%2C%20in%20__%20%28city%29." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 18.8z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg> Get this for your plot</a><a class="lnk" href="/20x30-house-plan">20x30 house plan guide</a></div>
+      <div class="acts"><a class="lnk" href="/20x30-house-plan">20x30 house plan guide</a></div>
     </div>
   </div>
 </section><section class="house" id="punjab" aria-labelledby="h-punjab">
-  <p class="eyebrow">Concept 05 · Punjab</p>
-  <h2 id="h-punjab">Family kothi, Punjab</h2>
-  <ul class="facts"><li>50 × 80 ft</li><li>South facing</li><li>Ground + 1</li><li>4 bedrooms + puja</li><li>About 2,660 sq ft built-up</li></ul>
+  <div class="house-head">
+    <div>
+      <p class="eyebrow">Concept 05 · Punjab</p>
+      <h2 id="h-punjab">Family kothi, Punjab</h2>
+      <ul class="facts"><li>50 × 80 ft</li><li>South facing</li><li>Ground + 1</li><li>4 bedrooms + puja</li><li>About 2,660 sq ft built-up</li></ul>
+    </div>
+    <a class="btn wa" href="https://wa.me/919898667753?text=Hi%20Plotform%2C%20I%20liked%20Concept%2005%20%28Punjab%20family%20kothi%29.%20My%20plot%20is%20__%20x%20__%20ft%2C%20facing%20__%2C%20in%20__%20%28city%29." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 18.8z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg> Get this for your plot</a>
+  </div>
   <div class="house-grid">
     <div class="viewer" data-viewer>
       <div class="tabs" role="tablist" aria-label="Concept 05 views"><button role="tab" aria-selected="true" data-i="0"><span>01</span>Plan</button><button role="tab" aria-selected="false" data-i="1"><span>02</span>3D plan</button><button role="tab" aria-selected="false" data-i="2"><span>03</span>Elevation</button></div>
-      <div class="stage" role="tabpanel"><img src="/designs-punjab-plan.svg" alt="Concept 05, Punjab family kothi: plan. 2D ground floor plan, 50 × 80 ft, south facing, furnished." width="1400" height="1050" class=on loading="lazy" decoding="async" data-cap="2D ground floor plan, 50 × 80 ft, south facing, furnished."><img src="/designs-punjab-3d.jpg" alt="Concept 05, Punjab family kothi: 3d plan. The same ground floor in 3D, cut open at ceiling height, with finishes and furniture." width="1400" height="1050"  loading="lazy" decoding="async" data-cap="The same ground floor in 3D, cut open at ceiling height, with finishes and furniture."><img src="/designs-punjab-elev.jpg" alt="Concept 05, Punjab family kothi: elevation. The finished house from the street: roof, materials, openings and landscape." width="1400" height="1050"  loading="lazy" decoding="async" data-cap="The finished house from the street: roof, materials, openings and landscape."><span class="hint">Tap for next view</span></div>
+      <div class="stage" role="tabpanel"><img src="/designs-punjab-plan.svg" alt="Concept 05, Punjab family kothi: plan. 2D ground floor plan, 50 × 80 ft, south facing, furnished." width="1400" height="1050" style="opacity:1" loading="lazy" decoding="async" data-cap="2D ground floor plan, 50 × 80 ft, south facing, furnished."><img src="/designs-punjab-3d.jpg" alt="Concept 05, Punjab family kothi: 3d plan. The same ground floor in 3D, cut open at ceiling height, with finishes and furniture." width="1400" height="1050" style="opacity:0" loading="lazy" decoding="async" data-cap="The same ground floor in 3D, cut open at ceiling height, with finishes and furniture."><img src="/designs-punjab-elev.jpg" alt="Concept 05, Punjab family kothi: elevation. The finished house from the street: roof, materials, openings and landscape." width="1400" height="1050" style="opacity:0" loading="lazy" decoding="async" data-cap="The finished house from the street: roof, materials, openings and landscape."></div>
+      <div class="scrub"><input type="range" min="0" max="200" step="1" value="0" aria-label="Slide from plan to 3D plan to elevation"><div class="ticks" aria-hidden="true"><span>Plan</span><span>3D plan</span><span>Elevation</span></div></div>
       <p class="cap"><span>2D ground floor plan, 50 × 80 ft, south facing, furnished.</span> <a class="full" href="/designs-punjab-plan.svg" target="_blank" rel="noopener">Open full size</a></p>
     </div>
     <div>
@@ -182,7 +243,7 @@
       <p class="brief-k">How the design answers it</p>
       <ul class="moves"><li>A <b>double-height drawing room</b> behind a two-storey glass wall, framed in stone.</li><li>A portico for two cars with a terrace above, opening off the first-floor master suite.</li><li>Dining and family lounge open through glass onto a back verandah and the rear garden, with a charpai for afternoons.</li><li>Puja room in the north-east; kitchen to the east with its own service door to the side.</li></ul>
       <p class="fl">Ground floor shown in the plan and 3D plan. The upper floor holds three bedrooms around the double-height void.</p>
-      <div class="acts"><a class="btn wa" href="https://wa.me/919898667753?text=Hi%20Plotform%2C%20I%20liked%20Concept%2005%20%28Punjab%20family%20kothi%29.%20My%20plot%20is%20__%20x%20__%20ft%2C%20facing%20__%2C%20in%20__%20%28city%29." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 18.8z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg> Get this for your plot</a><a class="lnk" href="/vastu-house-plan">Vastu house plan guide</a></div>
+      <div class="acts"><a class="lnk" href="/vastu-house-plan">Vastu house plan guide</a></div>
     </div>
   </div>
 </section>
@@ -195,11 +256,25 @@
 </main>
 <script>
 document.querySelectorAll('[data-viewer]').forEach(v => {
-  const tabs = [...v.querySelectorAll('[role=tab]')], imgs = [...v.querySelectorAll('.stage img')], cap = v.querySelector('.cap span'), full = v.querySelector('.cap .full'); let i = 0;
-  const show = n => { i = (n + imgs.length) % imgs.length; imgs.forEach((im, k) => { im.classList.toggle('on', k === i); if (k === i && im.loading === 'lazy') im.loading = 'eager'; }); tabs.forEach((t, k) => t.setAttribute('aria-selected', k === i)); cap.textContent = imgs[i].dataset.cap; full.href = imgs[i].getAttribute('src'); };
-  tabs.forEach((t, k) => { t.addEventListener('click', () => show(k)); t.addEventListener('keydown', e => { if (e.key === 'ArrowRight') { show(i + 1); tabs[i].focus(); } if (e.key === 'ArrowLeft') { show(i - 1); tabs[i].focus(); } }); });
-  v.querySelector('.stage').addEventListener('click', () => show(i + 1));
-  v.addEventListener('mouseenter', () => imgs.forEach(im => im.loading = 'eager'), { once: true });
+  const tabs = [...v.querySelectorAll('[role=tab]')], imgs = [...v.querySelectorAll('.stage img')], cap = v.querySelector('.cap span'), full = v.querySelector('.cap .full'), r = v.querySelector('.scrub input');
+  let val = 0, active = 0, anim = null;
+  const paint = x => {
+    val = Math.max(0, Math.min(200, x));
+    const t = val / 100;
+    imgs.forEach((im, k) => { const d = Math.abs(t - k), op = Math.max(0, 1 - d); im.style.opacity = op.toFixed(3); im.style.transform = `scale(${(1 + .035 * Math.min(1, d)).toFixed(4)})`; im.style.zIndex = op > .5 ? 2 : 1; });
+    r.value = val; r.style.setProperty('--p', (val / 2) + '%');
+    const a = Math.round(t); if (a !== active) { active = a; tabs.forEach((tb, k) => tb.setAttribute('aria-selected', k === a)); cap.textContent = imgs[a].dataset.cap; full.href = imgs[a].getAttribute('src'); }
+  };
+  const go = to => { cancelAnimationFrame(anim); const from = val, t0 = performance.now(), dur = 900;
+    const step = now => { const p = Math.min(1, (now - t0) / dur), e = p < .5 ? 4*p*p*p : 1 - Math.pow(-2*p + 2, 3) / 2; paint(from + (to - from) * e); if (p < 1) anim = requestAnimationFrame(step); };
+    anim = requestAnimationFrame(step); };
+  const warm = () => imgs.forEach(im => { im.loading = 'eager'; });
+  r.addEventListener('input', () => { cancelAnimationFrame(anim); warm(); paint(+r.value); });
+  r.addEventListener('change', () => go(Math.round(+r.value / 100) * 100));
+  tabs.forEach((tb, k) => { tb.addEventListener('click', () => { warm(); go(k * 100); }); tb.addEventListener('keydown', e => { if (e.key === 'ArrowRight' && k < 2) { tabs[k + 1].focus(); go((k + 1) * 100); } if (e.key === 'ArrowLeft' && k > 0) { tabs[k - 1].focus(); go((k - 1) * 100); } }); });
+  v.querySelector('.stage').addEventListener('click', () => { warm(); go(active >= 2 ? 0 : (active + 1) * 100); });
+  if ('IntersectionObserver' in window) { const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { warm(); io.disconnect(); } }), { rootMargin: '400px 0px' }); io.observe(v); }
+  paint(0);
 });
 </script>
 <footer class="contact">
