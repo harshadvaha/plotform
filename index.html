@@ -305,6 +305,7 @@ footer h2{font-size:clamp(30px,3.8vw,52px);margin:22px 0 30px}
   </a>
   <nav class="links" aria-label="Main">
     <a href="#about" data-panel="about">About</a>
+    <a href="/designs">Designs</a>
     <a href="/house-plans">Guides</a>
     <a class="btn shine" href="#brief" data-panel="brief">Share your requirements</a>
   </nav>
@@ -391,6 +392,28 @@ footer h2{font-size:clamp(30px,3.8vw,52px);margin:22px 0 30px}
   </div>
 </section>
 
+<section class="designs-strip" id="designs" aria-labelledby="dsTitle">
+  <style>
+  .designs-strip{padding-block:clamp(70px,10vh,110px);border-top:1px solid var(--hair)}
+  .ds-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:16px 32px}
+  .ds-head h2{font-size:clamp(28px,3vw,40px);line-height:1.12;margin:16px 0 0}
+  .ds-head p{color:var(--graphite);font-size:15px;max-width:46ch;margin-top:12px}
+  .ds-all{font-size:14px;color:var(--oak-deep);text-underline-offset:3px;white-space:nowrap}
+  .ds-cards{list-style:none;margin:28px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+  @media (max-width:820px){.ds-cards{grid-template-columns:1fr}}
+  .ds-cards li{display:flex}
+  .ds-cards a{flex:1;display:flex;flex-direction:column;gap:6px;text-decoration:none;color:var(--ink);border:1px solid var(--hair);padding:0 0 16px;transition:border-color .2s}
+  .ds-cards a:hover{border-color:var(--ink)}
+  .ds-cards img{width:100%;height:auto;display:block;border-bottom:1px solid var(--hair)}
+  .ds-cards .dk{font:400 11px/1.4 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);padding:10px 16px 0}
+  .ds-cards .dt{font:400 20px/1.25 var(--f-display);padding:0 16px}
+  </style>
+  <div class="wrap">
+    <div class="ds-head"><div><p class="eyebrow">Concept designs</p><h2 id="dsTitle">Five plots, five regions, from plan to elevation.</h2><p>Sample homes we drew to show how a brief becomes a plan, a 3D plan and a finished house.</p></div><a class="ds-all" href="/designs">See all five designs</a></div>
+    <ul class="ds-cards"><li><a href="/designs#kerala"><img src="/designs-kerala-thumb.jpg" alt="Concept 01: Kerala courtyard home, 3D elevation" width="800" height="600" loading="lazy" decoding="async"><span class="dk">Concept 01 · 40 × 60 ft · Single storey</span><span class="dt">Courtyard home, Kerala</span></a></li><li><a href="/designs#jaipur"><img src="/designs-jaipur-thumb.jpg" alt="Concept 02: Jaipur haveli-inspired home, 3D elevation" width="800" height="600" loading="lazy" decoding="async"><span class="dk">Concept 02 · 30 × 50 ft · Ground + 1</span><span class="dt">Haveli-inspired home, Jaipur</span></a></li><li><a href="/designs#bengaluru"><img src="/designs-bengaluru-thumb.jpg" alt="Concept 04: Bengaluru compact rental home, 3D elevation" width="800" height="600" loading="lazy" decoding="async"><span class="dk">Concept 04 · 20 × 30 ft · Ground + 2</span><span class="dt">Compact rental home, Bengaluru</span></a></li></ul>
+  </div>
+</section>
+
 <section class="packages" id="packages" aria-labelledby="pkgTitle">
   <div class="wrap faq-grid">
     <div><p class="eyebrow">Packages</p><h2 id="pkgTitle">House plan and 3D elevation packages</h2><p class="pkg-note">Prices depend on plot size and floors. Vastu-based layouts on request. Your exact quote comes with our reply to your brief.</p></div>
@@ -462,7 +485,7 @@ footer h2{font-size:clamp(30px,3.8vw,52px);margin:22px 0 30px}
       <button class="ghost" id="copyMail" type="button">Copy email</button>
     </div>
     <nav class="social" style="margin-top:22px" aria-label="Plotform on social media"><a href="https://www.instagram.com/plotform.design/" target="_blank" rel="noopener" aria-label="Plotform on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor"/></svg></a><a href="https://www.facebook.com/profile.php?id=61595442266504" target="_blank" rel="noopener" aria-label="Plotform on Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.6 21v-7.6h2.6l.4-3h-3V8.5c0-.9.3-1.5 1.5-1.5h1.6V4.3c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4V10.4H8v3h2.5V21" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></a></nav>
-    <nav class="guides" aria-label="House plan guides" style="display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:40px;font-size:14px"><a href="/house-plans" style="color:var(--ink)">House plan guides</a> <a style="color:var(--graphite);text-decoration:none" href="/30x40-house-plan">30x40 house plan</a> <a style="color:var(--graphite);text-decoration:none" href="/30x50-house-plan">30x50 house plan</a> <a style="color:var(--graphite);text-decoration:none" href="/20x30-house-plan">20x30 house plan</a> <a style="color:var(--graphite);text-decoration:none" href="/40x60-house-plan">40x60 house plan</a> <a style="color:var(--graphite);text-decoration:none" href="/east-facing-house-plan">East facing house plan</a> <a style="color:var(--graphite);text-decoration:none" href="/north-facing-house-plan">North facing house plan</a> <a style="color:var(--graphite);text-decoration:none" href="/vastu-house-plan">Vastu house plan</a> <a style="color:var(--graphite);text-decoration:none" href="/3d-front-elevation-design">3D front elevation design</a></nav>
+    <nav class="guides" aria-label="House plan guides" style="display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:40px;font-size:14px"><a href="/designs" style="color:var(--ink)">Concept designs</a> <a href="/house-plans" style="color:var(--ink)">House plan guides</a> <a style="color:var(--graphite);text-decoration:none" href="/30x40-house-plan">30x40 house plan</a> <a style="color:var(--graphite);text-decoration:none" href="/30x50-house-plan">30x50 house plan</a> <a style="color:var(--graphite);text-decoration:none" href="/20x30-house-plan">20x30 house plan</a> <a style="color:var(--graphite);text-decoration:none" href="/40x60-house-plan">40x60 house plan</a> <a style="color:var(--graphite);text-decoration:none" href="/east-facing-house-plan">East facing house plan</a> <a style="color:var(--graphite);text-decoration:none" href="/north-facing-house-plan">North facing house plan</a> <a style="color:var(--graphite);text-decoration:none" href="/vastu-house-plan">Vastu house plan</a> <a style="color:var(--graphite);text-decoration:none" href="/3d-front-elevation-design">3D front elevation design</a></nav>
     <div class="foot"><span>© 2026 Plotform</span><span>House plans · 3D elevations · 3D interiors · Online across India</span></div>
   </div>
 </footer>

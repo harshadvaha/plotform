@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://plotform.design/</loc>
-    <lastmod>2026-10-13</lastmod>
+    <lastmod>2026-10-14</lastmod>
   </url>
   <url>
     <loc>https://plotform.design/house-plans</loc>
@@ -39,5 +39,9 @@
   <url>
     <loc>https://plotform.design/3d-front-elevation-design</loc>
     <lastmod>2026-10-13</lastmod>
+  </url>
+  <url>
+    <loc>https://plotform.design/designs</loc>
+    <lastmod>2026-10-14</lastmod>
   </url>
 </urlset>
