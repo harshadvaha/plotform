@@ -480,8 +480,8 @@ footer h2{font-size:clamp(30px,3.8vw,52px);margin:22px 0 30px}
         <div class="f"><label for="fName">Name <i>*</i></label><input id="fName" name="name" autocomplete="name" required></div>
         <div class="f"><label for="fEmail">Email <i>*</i></label><input id="fEmail" name="email" type="email" autocomplete="email" required></div>
         <div class="f full"><label for="fPhone">Mobile number</label>
-          <div class="tel"><input id="fCode" name="code" value="+91" list="ccList" inputmode="tel" autocomplete="tel-country-code" aria-label="Country code" maxlength="5">
-          <input id="fPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="98765 43210"></div>
+          <div class="tel"><input id="fCode" name="code" value="+91" list="ccList" inputmode="tel" autocomplete="off" aria-label="Country code" maxlength="5">
+          <input id="fPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="98765 43210"></div>
           <datalist id="ccList"><option value="+91">India</option><option value="+971">UAE</option><option value="+966">Saudi Arabia</option><option value="+974">Qatar</option><option value="+965">Kuwait</option><option value="+968">Oman</option><option value="+973">Bahrain</option><option value="+1">USA / Canada</option><option value="+44">UK</option><option value="+61">Australia</option><option value="+64">New Zealand</option><option value="+65">Singapore</option></datalist></div>
         <div class="f"><label for="fCity">Plot location</label><input id="fCity" name="location" placeholder="City or area"></div>
         <div class="f"><label for="fPlot">Plot size</label><input id="fPlot" name="plot" placeholder="e.g. 30 × 50 ft"></div>
@@ -554,7 +554,25 @@ function copy(text, btn){
 }
 function selectFallback(btn){ const el = btn.parentElement.querySelector('.mail, pre'); if(!el) return; const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = 'Selected'; }
 $('#copyMail').addEventListener('click', e => copy(STUDIO_EMAIL, e.currentTarget));
+// Phone autofill (iOS/Android) drops the full number, e.g. +919824887721, into one box: split it into code + number
+const CODES = [...document.querySelectorAll('#ccList option')].map(o => o.value.slice(1)).sort((a, b) => b.length - a.length);
+function splitPhone(){
+  const ph = $('#fPhone'), cc = $('#fCode'), raw = ph.value.trim();
+  if(!/^\+?\d{1,4}$/.test(cc.value.trim())) cc.value = '+91';   // code box got junk from autofill: reset
+  else if(!cc.value.startsWith('+')) cc.value = '+' + cc.value.trim();
+  let dg = raw.replace(/\D/g, '');
+  if(raw.startsWith('+') || raw.startsWith('00')){
+    if(raw.startsWith('00')) dg = dg.slice(2);
+    const c = CODES.find(c => dg.startsWith(c) && dg.length - c.length >= 6);
+    if(c){ cc.value = '+' + c; ph.value = dg.slice(c.length); }
+  } else if(cc.value.replace(/\D/g, '') === '91' && dg.length === 12 && dg.startsWith('91')) ph.value = dg.slice(2);
+  else if(cc.value.replace(/\D/g, '') === '91' && dg.length === 11 && dg.startsWith('0')) ph.value = dg.slice(1);
+}
+['input','change','blur'].forEach(ev => $('#fPhone').addEventListener(ev, splitPhone));
+$('#fCode').addEventListener('blur', splitPhone);
+
 $('#briefForm').addEventListener('submit', async e => {
+  splitPhone();
   e.preventDefault();
   const f = e.currentTarget, d = Object.fromEntries(new FormData(f)), err = $('#formErr');
   if(!d.name.trim()) { err.textContent = 'Add your name so we know who to reply to.'; $('#fName').focus(); return; }
