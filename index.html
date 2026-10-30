@@ -178,6 +178,7 @@ section.brief{padding-block:clamp(80px,12vh,130px);background:var(--wash)}
 form{display:grid;grid-template-columns:1fr 1fr;gap:22px 24px}
 .f{display:grid;gap:8px;min-width:0}
 .f.full{grid-column:1/-1}
+.tel{display:grid;grid-template-columns:6.5em minmax(0,1fr);gap:8px}
 label{font:500 11px/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--graphite)}
 label i{font-style:normal;color:var(--oak-deep)}
 input,select,textarea{font:400 16px/1.4 var(--f-body);color:var(--ink);background:var(--paper);border:1px solid var(--line2);border-radius:2px;padding:12px 14px;width:100%;transition:border-color .2s}
@@ -478,6 +479,10 @@ footer h2{font-size:clamp(30px,3.8vw,52px);margin:22px 0 30px}
         <div style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden" aria-hidden="true"><label for="fWeb">Leave this empty</label><input id="fWeb" name="_gotcha" type="text" tabindex="-1" autocomplete="off"></div>
         <div class="f"><label for="fName">Name <i>*</i></label><input id="fName" name="name" autocomplete="name" required></div>
         <div class="f"><label for="fEmail">Email <i>*</i></label><input id="fEmail" name="email" type="email" autocomplete="email" required></div>
+        <div class="f full"><label for="fPhone">Mobile number</label>
+          <div class="tel"><input id="fCode" name="code" value="+91" list="ccList" inputmode="tel" autocomplete="tel-country-code" aria-label="Country code" maxlength="5">
+          <input id="fPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="98765 43210"></div>
+          <datalist id="ccList"><option value="+91">India</option><option value="+971">UAE</option><option value="+966">Saudi Arabia</option><option value="+974">Qatar</option><option value="+965">Kuwait</option><option value="+968">Oman</option><option value="+973">Bahrain</option><option value="+1">USA / Canada</option><option value="+44">UK</option><option value="+61">Australia</option><option value="+64">New Zealand</option><option value="+65">Singapore</option></datalist></div>
         <div class="f"><label for="fCity">Plot location</label><input id="fCity" name="location" placeholder="City or area"></div>
         <div class="f"><label for="fPlot">Plot size</label><input id="fPlot" name="plot" placeholder="e.g. 30 × 50 ft"></div>
         <div class="f full"><label for="fBudget">Construction budget</label>
@@ -555,8 +560,12 @@ $('#briefForm').addEventListener('submit', async e => {
   if(!d.name.trim()) { err.textContent = 'Add your name so we know who to reply to.'; $('#fName').focus(); return; }
   if(!/^\S+@\S+\.\S+$/.test(d.email)) { err.textContent = 'Enter an email address we can reply to.'; $('#fEmail').focus(); return; }
   if(d.brief.trim().length < 10) { err.textContent = 'Add a line or two about the project.'; $('#fBrief').focus(); return; }
+  const digits = (d.phone || '').replace(/\D/g, ''), code = '+' + (d.code || '').replace(/\D/g, '');
+  if(digits && (digits.length < 6 || digits.length > 15 || code.length < 2)) { err.textContent = 'Check the mobile number and country code.'; $('#fPhone').focus(); return; }
+  d.phone = digits ? `${code} ${digits}` : ''; delete d.code;
   err.textContent = '';
-  const text = `Name: ${d.name}\nEmail: ${d.email}\nLocation: ${d.location || '-'}\nPlot size: ${d.plot || '-'}\nBudget: ${d.budget || '-'}\n\n${d.brief}`;
+  const text = `Name: ${d.name}\nEmail: ${d.email}\nMobile: ${d.phone || '-'}\nLocation: ${d.location || '-'}\nPlot size: ${d.plot || '-'}\nBudget: ${d.budget || '-'}\n\n${d.brief}`;
+  if(d.phone) d.brief = `Mobile: ${d.phone}\n\n${d.brief}`;   // also inside the brief so the email always shows it
   if(d._gotcha){ $('#formWrap').innerHTML = `<div class="sent"><h3>Thank you.</h3></div>`; return; }
   let failed = false;
   if(FORM_ENDPOINT){
