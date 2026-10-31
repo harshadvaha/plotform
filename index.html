@@ -585,7 +585,7 @@ $('#briefForm').addEventListener('submit', async e => {
   err.textContent = '';
   const text = `Name: ${d.name}\nEmail: ${d.email}\nMobile: ${d.phone || '-'}\nLocation: ${d.location || '-'}\nPlot size: ${d.plot || '-'}\nBudget: ${d.budget || '-'}\n\n${d.brief}`;
   if(d.phone) d.brief = `Mobile: ${d.phone}\n\n${d.brief}`;   // also inside the brief so the email always shows it
-  if(d._gotcha || performance.now() < 2500){ $('#formWrap').innerHTML = `<div class="sent"><h3>Thank you.</h3></div>`; return; }
+  if(d._gotcha || performance.now() < 8000){ $('#formWrap').innerHTML = `<div class="sent"><h3>Thank you.</h3></div>`; return; }
   let failed = false;
   if(FORM_ENDPOINT){
     const btn = f.querySelector('button[type=submit]'), label = btn.firstChild.textContent;
